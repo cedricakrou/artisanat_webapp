@@ -5,9 +5,11 @@ import java.io.File
 
 object InteractionServer
 {
-    const val addressImage : String = "/Users/mac/neo/"
+    const val addressImage : String = "/Users/mac/artisan/"
 
-    const val preAuth : String = addressImage + "preAuth/"
+    const val cniRecto : String = addressImage + "cniRecto/"
+
+    const val cniVerso : String = addressImage + "cniVerso/"
 
     fun saveImage( urlImage : String, image : MultipartFile,  nameImage : String ) : Boolean
     {

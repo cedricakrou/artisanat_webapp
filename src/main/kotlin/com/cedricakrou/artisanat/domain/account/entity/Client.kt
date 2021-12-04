@@ -1,5 +1,6 @@
 package com.cedricakrou.artisanat.domain.account.entity
 
+import com.cedricakrou.artisanat.domain.announcement.entity.Announcement
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
@@ -8,6 +9,8 @@ import javax.persistence.*
 @JsonIgnoreProperties( ignoreUnknown = true )
 class Client() : User() {
 
+    var accountConfirmed : Boolean = false
+
 
     constructor( username: String, password: String, roles : Set<Role> = setOf() ) : this() {
 
@@ -15,5 +18,8 @@ class Client() : User() {
         this.password = password
         this.roles = roles
     }
+
+    @OneToMany( mappedBy = "client" )
+    var announcements : MutableList<Announcement> = mutableListOf()
 
 }

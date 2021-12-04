@@ -24,4 +24,6 @@ interface IManageUser {
     fun savePin( user: User) : OperationResult<User>
 
     fun changePassword( userVm: UserVm) : OperationResult<UserVm>
+
+    fun saveData(user : User )
 }

@@ -5,7 +5,10 @@ import com.cedricakrou.artisanat.application.event.RegisterDoneEvent
 import com.cedricakrou.artisanat.domain.account.entity.User
 import com.cedricakrou.artisanat.domain.account.vm.UserVm
 import com.cedricakrou.artisanat.data.repositories.UserRepository
+import com.cedricakrou.artisanat.domain.account.entity.Artisan
 import com.cedricakrou.artisanat.domain.common.OperationResult
+import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
+import com.cedricakrou.artisanat.domain.speciality.worker.SpecialityDomain
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -14,7 +17,7 @@ import kotlin.collections.HashMap
 
 @Service
 class UserWorker(private val userRepository: UserRepository,
-//                 val specialityDomain: SpecialityDomain,
+                 val specialityDomain: SpecialityDomain,
                  val eventPublisher: ApplicationEventPublisher,
 ) : UserDomain {
 
@@ -151,6 +154,20 @@ class UserWorker(private val userRepository: UserRepository,
           errors["pinEmpty"] = "Veuillez enregistrer votre code pin."
         }
 
+        if( user is Artisan ) {
+
+            val speciality : Speciality? = specialityDomain.findById( user.speciality!!.id ).orElse(null)
+
+            if ( speciality == null ) {
+                errors["specialityNotExist"] = "La specialité est introuvable"
+            }
+            else {
+                user.speciality = speciality
+            }
+
+        }
+
+
         if ( errors.isEmpty() ){
 
             var userFind = userRepository.findByUsername( user.username  ).orElse(null)
@@ -223,6 +240,10 @@ class UserWorker(private val userRepository: UserRepository,
         }
 
         return  OperationResult( errors, userVm )
+    }
+
+    override fun saveData(user: User) {
+        userRepository.save( user )
     }
 
     override fun findByReference(reference: String): Optional<User> = userRepository.findByReference( reference )
