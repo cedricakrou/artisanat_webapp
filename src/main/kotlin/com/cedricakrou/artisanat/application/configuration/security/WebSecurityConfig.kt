@@ -38,7 +38,7 @@ class WebSecurityConfig(private val userDetailsServiceImplementation : UserDetai
                     .passwordParameter("password")
                     .successHandler( authenticationSuccessHandler )
                     .failureHandler( authenticationFailureHandler )
-                    .defaultSuccessUrl("/backend", true)
+                    .defaultSuccessUrl("/static/backend", true)
                     .permitAll()
                 .and()
                 .logout()
@@ -56,8 +56,8 @@ class WebSecurityConfig(private val userDetailsServiceImplementation : UserDetai
         super.configure(web)
 
         web?.ignoring()?.antMatchers(
-                "/backend/assets/**",
-                "/static/frontend/**",
+            "/assets/**",
+            "/frontend/**",
                 "/swagger-resources/**",
                 "/v2/api-docs",
                 "/swagger-ui.html",

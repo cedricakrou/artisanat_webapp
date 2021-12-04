@@ -19,7 +19,7 @@ class MainController(private val userDomain: UserDomain,
 ) : BaseController( "/backend" )  {
 
     companion object {
-        const val baseBackendTemplate = "backend"
+        const val baseBackendTemplate = "/backend"
         const val baseAccountTemplate = "/general"
         const val changePassword = "/change-password"
 

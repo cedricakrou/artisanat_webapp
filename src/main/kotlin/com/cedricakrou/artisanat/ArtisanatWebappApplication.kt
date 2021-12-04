@@ -1,9 +1,11 @@
 package com.cedricakrou.artisanat
 
 import com.cedricakrou.artisanat.application.bootstrap.RoleBootstrap
+import com.cedricakrou.artisanat.application.bootstrap.SpecialityBootstrap
 import com.cedricakrou.artisanat.application.bootstrap.UserBootstrap
 import com.cedricakrou.artisanat.domain.account.worker.RoleDomain
 import com.cedricakrou.artisanat.domain.account.worker.UserDomain
+import com.cedricakrou.artisanat.domain.speciality.worker.SpecialityDomain
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -20,11 +22,12 @@ class ArtisanatWebappApplication {
 	fun initDatabase(
 		roleDomain: RoleDomain,
 		userDomain: UserDomain,
+		specialityDomain: SpecialityDomain
 	) : CommandLineRunner {
 		return CommandLineRunner {
-
 			RoleBootstrap.seed(roleDomain)
 			UserBootstrap.seed( userDomain, roleDomain)
+			SpecialityBootstrap.seed( specialityDomain  )
 		}
 	}
 

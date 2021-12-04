@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="fragments/fragment_head('Login page')" />
+
+
+<body class="login-page sidebar-collapse">
+
+<div class="page-header header-filter" filter-color="orange">
+    <div class="page-header-image" style="background-image:url(../assets/img/login.jpg)"></div>
+    <div class="content">
+        <div class="container">
+            <div class="col-md-5 ml-auto mr-auto">
+                <div class="card card-login card-plain">
+
+                    <form class="form" th:method="POST" th:action="@{/account/login}">
+                        <div class="card card-login card-plain">
+                            <div class="card-header ">
+                                <div class="logo-container">
+                                    <img th:src="@{/assets/img/logo.jpg}" alt="">
+                                </div>
+                            </div>
+                            <div class="card-body ">
+                                <div class="input-group no-border form-control-lg">
+                                    <span class="input-group-prepend">
+                      <div class="input-group-text">
+
+                          <i class="now-ui-icons users_circle-08"></i>
+
+                      </div>
+                    </span>
+                                    <input type="text" class="form-control" name="username" placeholder="username ...">
+                                </div>
+
+                                <div class="input-group no-border form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="now-ui-icons text_caps-small"></i>
+                                        </div>
+                                    </div>
+                                    <input type="password" name="password" placeholder="password ..." class="form-control" />
+                                </div>
+                            </div>
+
+
+                            <div class="card-footer ">
+                                <button type="submit" class="btn btn-primary btn-round btn-lg btn-block mb-3">Se
+                                    Connecter
+                                </button>
+
+                                <!--
+                                                                <div class="pull-left">
+                                                                    <h6>
+                                                                        <a href="#pablo" class="link footer-link">Creer un compte</a>
+                                                                    </h6>
+                                                                </div>
+                                                                <div class="pull-right">
+                                                                    <h6>
+                                                                        <a href="#pablo" class="link footer-link">Besoin  d'aide?</a>
+                                                                    </h6>
+                                                                </div>
+
+                                -->
+                               </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:replace="fragments/fragment_footer :: footer" />
+
+</div>
+
+
+<th:block th:replace="fragments/fragment_script :: script " />
+
+
+<script type="application/javascript">
+
+    function gup( name )
+    {
+        var url = location.href;
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)";
+        var regex = new RegExp( regexS );
+        var results = regex.exec( url );
+
+        console.log( "ok " + results );
+
+        if ( results != null ) {
+            notifyWarning('Error', "Erreur lors de la connexion: username ou password incorrect");
+        }
+
+//        return results == null ? null : results[1];
+    }
+
+    gup('error');
+
+</script>
+
+</body>
+
+</html>

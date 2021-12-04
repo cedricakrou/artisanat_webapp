@@ -1,0 +1,189 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="sidebar" class="sidebar" data-color="red">
+    <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+    <div class="logo">
+        <a href="" class="simple-text logo-normal">
+            DJEPAY
+        </a>
+
+
+        <div class="navbar-minimize">
+            <button id="minimizeSidebar" class="btn btn-outline-white btn-icon btn-round" >
+                <i class="now-ui-icons text_align-center visible-on-sidebar-regular" ></i>
+                <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini" ></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="sidebar-wrapper" id="sidebar-wrapper">
+
+        <div class="logo">
+
+            <a href="" class="simple-text logo-normal" th:text="${user.username  + ' - ' + user.function }"> </a>
+
+            <a href="" class="simple-text logo-normal" th:text="${ 'SOLDE: ' + #numbers.formatDecimal(user.balance, 1, 'DEFAULT', 2, 'DEFAULT')}" > </a>
+
+        </div>
+
+
+
+            <ul class="nav">
+
+                <div th:unless="${user.firstConnection}">
+
+                    <li>
+                        <a th:href="@{/backend}">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+
+                    <!-- ACTUATOR -->
+
+                    <li th:if="${user.actuator}">
+                        <a th:href="@{/backend/profil/actuator}">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>Mon Profil</p>
+                        </a>
+                    </li>
+
+
+                    <!-- EMPLOYEES -->
+
+                    <!-- PDG -->
+
+                    <li th:if="${user.pdg}">
+                        <a th:href="@{/backend/pdg/manage-agencies}">
+                            <i class="now-ui-icons emoticons_satisfied"></i>
+                            <p>Management des agences</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.pdg}">
+                        <a th:href="@{/backend/pdg/manage-employees}">
+                            <i class="now-ui-icons emoticons_satisfied"></i>
+                            <p>Management des users</p>
+                        </a>
+                    </li>
+
+                    <!-- CHIEF AGENCY -->
+
+                    <li th:if="${user.chiefAgency}">
+                        <a th:href="@{/backend/employees/manage-employees}">
+                            <i class="now-ui-icons emoticons_satisfied"></i>
+                            <p>Management des users</p>
+                        </a>
+                    </li>
+
+
+                    <!-- CUSTOMER MANAGER-->
+
+                    <li th:if="${user.customerManager}">
+                        <a th:href="@{/backend/employees/manage-distributor}">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>Revendeur</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.customerManager}">
+                        <a th:href="@{/backend/employees/manage-client}">
+                            <i class="now-ui-icons emoticons_satisfied"></i>
+                            <p>Client</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.customerManager}">
+                        <a th:href="@{/backend/employees/manage-code-voucher}">
+                            <i class="now-ui-icons transportation_air-baloon"></i>
+                            <p>Code Voucher</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.customerManager}">
+                        <a th:href="@{/backend/employees/history-code-voucher}">
+                            <i class="now-ui-icons education_agenda-bookmark"></i>
+                            <p>Historique Code Voucher</p>
+                        </a>
+                    </li>
+
+
+                    <!--- General employees -->
+
+                    <li th:if="${user.employees}">
+                        <a th:href="@{/backend/employees/my-history}">
+                            <i class="now-ui-icons education_agenda-bookmark"></i>
+                            <p>Mon Historique</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.employees}">
+                        <a th:href="@{/backend/employees/profile}">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>Mon Profil</p>
+                        </a>
+                    </li>
+
+
+                    <!-- DISTRIBUTOR -->
+
+                    <li th:if="${user.distributor}">
+                        <a th:href="@{/backend/distributor/manage-code-voucher}">
+                            <i class="now-ui-icons transportation_air-baloon"></i>
+                            <p>Code Voucher</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.distributor}">
+                        <a th:href="@{/backend/distributor/reload-client}">
+                            <i class="now-ui-icons emoticons_satisfied"></i>
+                            <p>Client</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.distributor}">
+                        <a th:href="@{/backend/distributor/manage-withdrawal}">
+                            <i class="now-ui-icons emoticons_satisfied"></i>
+                            <p>Historique ordre de Retrait</p>
+                        </a>
+                    </li>
+
+
+                    <li th:if="${user.distributor}">
+                        <a th:href="@{/backend/distributor/my-history}">
+                            <i class="now-ui-icons education_agenda-bookmark"></i>
+                            <p>Mon Historique</p>
+                        </a>
+                    </li>
+
+
+                    <li th:if="${user.distributor}">
+                        <a th:href="@{/backend/distributor/history-code-voucher}">
+                            <i class="now-ui-icons education_agenda-bookmark"></i>
+                            <p>Historique Code Voucher</p>
+                        </a>
+                    </li>
+
+                    <li th:if="${user.distributor}">
+                        <a th:href="@{/backend/distributor/profile}">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>Mon Profil</p>
+                        </a>
+                    </li>
+
+                </div>
+
+
+
+                <li>
+                    <a th:href="@{/account/logout}">
+                        <i class="now-ui-icons arrows-1_share-66"></i>
+                        <p>Me Déconnecter</p>
+                    </a>
+                </li>
+
+            </ul>
+
+    </div>
+
+</div>

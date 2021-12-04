@@ -25,17 +25,17 @@ class WebMvcConfig(private val authenticationUserInterception: AuthenticationUse
     override fun addResourceHandlers(registry: ResourceHandlerRegistry) {
         super.addResourceHandlers(registry)
 
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/")
+        registry!!.addResourceHandler("swagger-ui.html")
+            .addResourceLocations("classpath:/META-INF/resources/")
 
         registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/")
 
         registry.addResourceHandler("/css/**")
-                .addResourceLocations("classpath:/static/css/")
+            .addResourceLocations("classpath:/static/css/")
 
         registry.addResourceHandler("/js/**")
-                .addResourceLocations("classpath:/static/js/")
+            .addResourceLocations("classpath:/static/js/")
 
     }
 

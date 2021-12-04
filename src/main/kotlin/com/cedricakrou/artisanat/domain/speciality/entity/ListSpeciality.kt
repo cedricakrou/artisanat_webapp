@@ -10,5 +10,5 @@ object ListSpeciality {
     const val CLEANER = "Cleaner"
     const val GARDENER = "Gardener"
     const val ELECTRICIAN = "Electricien"
-    const val Nurse = "Infirmier"
+    const val NURSE = "Infirmier"
 }

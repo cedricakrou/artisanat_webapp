@@ -14,10 +14,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes
 import javax.servlet.http.HttpServletRequest
 
 @Controller
-@RequestMapping("account")
+@RequestMapping("/account")
 class AccountController(val verifyUser: VerifyUser,
                         val userDomain: UserDomain
-) : BaseController(templateBaseDir = "/backend/account", routeBase = "/account" )  {
+) : BaseController("/account")  {
 
     @GetMapping(value = ["", "/login"])
     internal fun login(

@@ -1,0 +1,3 @@
+<td xmlns:th="http://www.thymeleaf.org" th:fragment="amount(amount)">
+    <span th:text="${#numbers.formatDecimal(amount, 1, 'DEFAULT', 2, 'DEFAULT')}" />
+</td>

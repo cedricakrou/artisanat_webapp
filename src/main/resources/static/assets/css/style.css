@@ -1,0 +1,9 @@
+.color-white{
+    color: #fff!important;
+}
+
+.stat-result-text {
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+}
