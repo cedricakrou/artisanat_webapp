@@ -2,6 +2,7 @@ package com.cedricakrou.artisanat.application.controller
 
 import com.b2i.neo.application.controlForm.Color
 import com.cedricakrou.artisanat.application.controlForm.ControlForm
+import com.cedricakrou.artisanat.application.controlForm.VerifyUser
 import com.cedricakrou.artisanat.application.controller.common.UrlCommon
 import com.cedricakrou.artisanat.application.event.SignUpStepOneEvent
 import com.cedricakrou.artisanat.domain.account.entity.Artisan
@@ -10,11 +11,13 @@ import com.cedricakrou.artisanat.domain.account.entity.User
 import com.cedricakrou.artisanat.domain.account.entity.UserType
 import com.cedricakrou.artisanat.domain.account.worker.RoleDomain
 import com.cedricakrou.artisanat.domain.account.worker.UserDomain
+import com.cedricakrou.artisanat.domain.announcement.worker.AnnouncementDomain
 import com.cedricakrou.artisanat.domain.common.OperationResult
 import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
 import com.cedricakrou.artisanat.infrastructure.helper.InteractionServer
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -27,12 +30,14 @@ import java.util.*
 class ArtisanController(
     val roleDomain: RoleDomain,
     val userDomain: UserDomain,
+    val verifyUser: VerifyUser,
+    val announcementDomain: AnnouncementDomain,
     private val eventPublisher: ApplicationEventPublisher
 ) : BaseController( UrlCommon.artisanEndPoint ) {
 
     companion object {
         const val signUpSuccess = "sign-up-success"
-
+        const val listAnnouncements = "list-announcements"
     }
 
     @GetMapping(UrlCommon.home)
@@ -149,5 +154,17 @@ class ArtisanController(
 
 
         return forwardTo(  UrlCommon.save )
+    }
+
+    @GetMapping( listAnnouncements )
+    fun listAnnouncements(
+        model : Model
+    ) : String {
+
+        val user = verifyUser.getUserAuthenticated() as Artisan
+
+        model.addAttribute( "announcements", announcementDomain.findAnnouncementsBySpeciality( user.speciality!!.id ) )
+
+        return forwardTo( listAnnouncements )
     }
 }

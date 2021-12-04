@@ -5,6 +5,7 @@ object ApiConst {
 
     const val account = "${endPointBase}account/"
     const val client = "${endPointBase}client/"
+    const val announcement = "${endPointBase}announcement/"
 
     // variable
 
