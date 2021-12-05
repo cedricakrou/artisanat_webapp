@@ -1,11 +1,13 @@
 package com.cedricakrou.artisanat.domain.announcement.worker
 
+import com.b2i.neo.application.controlForm.Generate
 import com.cedricakrou.artisanat.application.controlForm.VerifyUser
 import com.cedricakrou.artisanat.data.repositories.AnnouncementRepository
 import com.cedricakrou.artisanat.domain.account.entity.client.Client
 import com.cedricakrou.artisanat.domain.account.entity.User
 import com.cedricakrou.artisanat.domain.announcement.entity.Announcement
 import com.cedricakrou.artisanat.domain.common.OperationResult
+import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
 import com.cedricakrou.artisanat.domain.speciality.worker.SpecialityDomain
 import org.springframework.stereotype.Service
 import java.util.*
@@ -57,6 +59,9 @@ class AnnouncementWorker( val repository : AnnouncementRepository,
         }
 
         if ( errors.isEmpty() ) {
+
+            model.reference =  Generate.generatedRandomCharacter( 5 )  + "A-" + String.format("%03d", count() + 1 )
+
             announcement = repository.save( model )
         }
 
@@ -74,7 +79,8 @@ class AnnouncementWorker( val repository : AnnouncementRepository,
 
     override fun count(): Long = repository.count()
 
-    override fun findMyAnnouncements(username: String): List<Announcement> = repository.findAllByClient_Username( username )
+    override fun findMyAnnouncements(username: String): List<Announcement>  = repository.findAllByClient_Username(username)
 
-    override fun findAnnouncementsBySpeciality( id : Long ): List<Announcement> = repository.findAllBySpeciality_Id(id)
+    override fun findAnnouncementsBySpeciality( id : Long ): List<Announcement> = repository.findAllBySpeciality_Id( id )
+
 }

@@ -19,7 +19,7 @@ class ApiAnnouncement(
     companion object {
         const val save = "/save"
 
-        const val myAnnouncements = "my-announcements"
+        const val myAnnouncements = "/my-announcements"
     }
 
     @PostMapping( save )
@@ -55,9 +55,9 @@ class ApiAnnouncement(
         return response
     }
 
-    @GetMapping( "${com.cedricakrou.artisanat.infrastructure.remote.web_services.annonce.ApiAnnouncement.Companion.myAnnouncements}/{username}" )
+    @PostMapping( myAnnouncements )
     fun myAnnouncements(
-        @PathVariable("username") username : String
+        @RequestParam("username") username : String
     ) : Response<List<Announcement>> =
         Response<List<Announcement>>().apply {
             error = false

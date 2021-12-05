@@ -4,6 +4,7 @@ import com.cedricakrou.artisanat.domain.account.entity.Role
 import com.cedricakrou.artisanat.domain.account.entity.User
 import com.cedricakrou.artisanat.domain.account.entity.UserType
 import com.cedricakrou.artisanat.domain.announcement.entity.Announcement
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.*
 
@@ -28,6 +29,7 @@ class Client() : User() {
     }
 
     @OneToMany( mappedBy = "client" )
+    @JsonIgnore
     var announcements : MutableList<Announcement> = mutableListOf()
 
 }

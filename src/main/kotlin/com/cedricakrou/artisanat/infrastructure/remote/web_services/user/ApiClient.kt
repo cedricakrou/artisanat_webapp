@@ -90,13 +90,22 @@ class ApiClient(val roleDomain : RoleDomain,
                 if ( success ) {
 
                     val code = Generate.generatedRandomNumber( "04", 10000 )
-
+/**
 
                     Thread {
                         smsManager.sendSms(
                             to = client.phoneNumber,
                             content = SmsText.text( code )
                         )
+
+                    }.start()
+
+**/
+
+
+                    Thread{
+
+                        eventPublisher.publishEvent( SendCodeEvent(  SendCodeDto( operationResult.data, code )  ) )
 
                     }.start()
 
@@ -197,7 +206,7 @@ class ApiClient(val roleDomain : RoleDomain,
     fun verifyOtp(
         @RequestParam( "username" ) username: String,
         @RequestParam( "code" ) code : String
-    ) : Response<SecureCode> = secureCodeService.verifyOtp( username, code )
+    ) : Response<SecureCode> = secureCodeService.authenticatedCodeSecure( username, code )
 
     @PostMapping( sendOtp )
     fun sendOtp( @RequestParam("username") username : String ) : Response<Nothing> =  secureCodeService.generateCodeSecure( username )

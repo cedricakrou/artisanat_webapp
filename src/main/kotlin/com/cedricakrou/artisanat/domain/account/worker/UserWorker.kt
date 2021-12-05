@@ -48,11 +48,11 @@ class UserWorker(private val userRepository: UserRepository,
 
         if (user.id <= 0L) {
 
-            if ( userRepository.countByUsername( user.username ) != 0L ) {
+            if ( userRepository.countByUsername( user.username ) != 0L && user.id == -1L  ) {
                 errors.put("usernameExists", "Cet username est dejà utilisé" )
             }
 
-            if ( userRepository.countByEmail( user.email ) != 0L ) {
+            if ( userRepository.countByEmail( user.email ) != 0L && user.id == -1L ) {
                 errors.put("emailExists", "Cet Email est dejà utilisé" )
             }
 

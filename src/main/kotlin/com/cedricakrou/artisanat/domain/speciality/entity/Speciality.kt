@@ -15,6 +15,7 @@ class Speciality( var name : String = "", var description : String = "" ) : Base
     var artisans : MutableList<Artisan> = mutableListOf()
 
     @OneToMany( mappedBy = "speciality" )
+    @JsonIgnore
     var announcements : MutableList<Announcement> = mutableListOf()
 
 }
