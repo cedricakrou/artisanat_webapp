@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class ReferenceWorker( repository: ReferenceRepository ) : ReferenceDomain
+class ReferenceWorker( val repository: ReferenceRepository ) : ReferenceDomain
 {
 
     override fun save(model: Reference): OperationResult<Reference> {
