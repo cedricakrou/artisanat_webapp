@@ -4,6 +4,7 @@ import com.cedricakrou.artisanat.domain.account.entity.client.Client
 import com.cedricakrou.artisanat.domain.common.BaseTableEntity
 import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
 import java.util.*
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.ManyToOne
 
@@ -24,5 +25,9 @@ class Announcement : BaseTableEntity() {
     @ManyToOne
     lateinit var speciality : Speciality
 
+    @Column( columnDefinition = "boolean default true" )
+    var activate : Boolean = true
 
+    @Column( columnDefinition = "boolean default false" )
+    var delete : Boolean = false
 }

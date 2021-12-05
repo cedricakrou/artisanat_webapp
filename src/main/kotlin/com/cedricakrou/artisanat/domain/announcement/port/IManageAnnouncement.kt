@@ -9,4 +9,6 @@ interface IManageAnnouncement : BasePort<Announcement> {
 
     fun findAnnouncementsBySpeciality( id : Long ) : List<Announcement>
 
+    fun findAllByDelete( delete : Boolean ) : List<Announcement>
+
 }

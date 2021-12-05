@@ -12,4 +12,7 @@ interface AnnouncementRepository : JpaRepository<Announcement, Long>  {
     fun findAllByClient_Username( username : String ) : List<Announcement>
     fun findAllBySpeciality_Id( id : Long ) : List<Announcement>
 
+
+    fun findAllByDelete( delete : Boolean ) : List<Announcement>
+
 }

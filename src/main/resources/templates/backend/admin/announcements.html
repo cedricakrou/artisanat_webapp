@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="fragments/fragment_head('Management artisans')" />
+
+<body>
+<div class="wrapper">
+    <th:block th:replace="fragments/fragment_sidebar :: sidebar"/>
+
+    <div class="main-panel" id="main-panel">
+
+        <section class="p-4">
+            <div class="container">
+
+            </div>
+        </section>
+
+        <section>
+            <div class="panel-header panel-header-sm">
+            </div>
+
+            <div class="content">
+                <div class="row ml-5 mr-5 ">
+
+                    <div class="col-lg-4 col-md-6" th:each="announcement : ${announcements}">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <span>Par </span><h5 class="card-category" th:text="${announcement.client.firstname + ' ' + announcement.client.lastname }"></h5>
+                                <h4 class="card-title" th:text="${announcement.title}"></h4>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                                        <i class="now-ui-icons loader_gear"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a th:if="${announcement.activate}" class="dropdown-item" th:href="@{/backend/admin/change-statut-announce/__${announcement.id}__}">Désactiver</a>
+                                        <a th:if="${!announcement.activate}" class="dropdown-item" th:href="@{/backend/admin/change-statut-announce/__${announcement.id}__}">Activer</a>
+                                        <a class="dropdown-item text-danger"  th:href="@{/backend/admin/delete-announce/__${announcement.id}__}">Supprimer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p th:text="${announcement.description}"></p>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="now-ui-icons arrows-1_refresh-69" th:text="${announcement.date}"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+    <!-- Modal reload distributor -->
+    <div id="modalBlock" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Bloquer compte',
+                                                updateUrl='/backend/admin/change-statut-announce',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+                            <p>Voulez vous désactiver l'annonce ?</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modalDeBlock" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Debloquer compte',
+                                                updateUrl='/backend/admin/change-statut-announce',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body_deblock">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+                            <p>Voulez vous activer l'annonce ?</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modalDelete" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Supprimer compte',
+                                                updateUrl='/backend/admin/delete-announce',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body_delete">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+                            <p>Voulez vous supprimer l'annonce ?</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<th:block th:replace="fragments/fragment_footer :: footer"/>
+
+<th:block th:replace="fragments/fragment_script :: script"/>
+</body>
+</html>

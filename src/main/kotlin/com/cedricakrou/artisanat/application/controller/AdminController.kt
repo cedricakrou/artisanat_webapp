@@ -10,14 +10,13 @@ import com.cedricakrou.artisanat.domain.account.entity.artisan.IManageArtisan
 import com.cedricakrou.artisanat.domain.account.entity.client.Client
 import com.cedricakrou.artisanat.domain.account.entity.client.IManageClient
 import com.cedricakrou.artisanat.domain.account.worker.UserDomain
+import com.cedricakrou.artisanat.domain.announcement.entity.Announcement
+import com.cedricakrou.artisanat.domain.announcement.worker.AnnouncementDomain
 import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
 import com.cedricakrou.artisanat.domain.speciality.worker.SpecialityDomain
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.mvc.support.RedirectAttributes
 
 @Controller
@@ -27,6 +26,7 @@ class AdminController(
     private val verifyUser: VerifyUser,
     val artisanService : IManageArtisan,
     val specialityDomain: SpecialityDomain,
+    val announcementDomain: AnnouncementDomain,
     val clientDomain : IManageClient
 ) : BaseController( UrlCommon.adminEndPoint ) {
 
@@ -40,6 +40,10 @@ class AdminController(
 
         const val changeStatutClient = "/change-statut-client"
         const val deleteClient  = "/delete-client"
+
+        const val announcements = "/announcements"
+        const val changeStatutAnnounce = "/change-statut-announce"
+        const val deleteAnnounce  = "/delete-announce"
     }
 
     @GetMapping(UrlCommon.home)
@@ -79,6 +83,10 @@ class AdminController(
 
         return redirectTo( artisans)
     }
+
+    /**
+     * Speciality c
+     */
 
     @GetMapping(specialities)
     fun specialities(
@@ -129,6 +137,11 @@ class AdminController(
 
         return redirectTo( specialities)
     }
+
+
+    /**
+     * Clients
+     */
 
     @GetMapping( clients )
     fun clients(
@@ -209,6 +222,95 @@ class AdminController(
 
 
         return redirectTo( clients )
+    }
+
+
+    /**
+     * Announcements
+     */
+
+    @GetMapping( announcements )
+    fun announcements(
+        model: Model
+    ) : String {
+
+        model.addAttribute( "announcements", announcementDomain.findAllByDelete( delete = false )  )
+
+        return forwardTo( announcements )
+    }
+
+
+    @GetMapping( changeStatutAnnounce + "/{id}" )
+    fun changeStatutAnnonce(
+        redirectAttributes: RedirectAttributes,
+        @PathVariable( "id" ) id: Long,
+    ) : String {
+
+        val announcement : Announcement? = announcementDomain.findById(id).orElse(null)
+
+        if ( announcement == null ) {
+
+            ControlForm.redirectAttribute(
+                redirectAttributes,
+                "annonce introuvable",
+                Color.red
+            )
+
+        }
+        else {
+
+            announcement.activate = !announcement.activate
+
+            announcementDomain.save( announcement )
+
+            ControlForm.redirectAttribute(
+                redirectAttributes,
+                if( !announcement.activate ) "Annonce desactivée" else "Annonce activée",
+                Color.green
+            )
+
+        }
+
+
+        return redirectTo( announcements )
+    }
+
+
+    @GetMapping( deleteAnnounce + "/{id}" )
+    fun deleteAnnounce(
+        redirectAttributes: RedirectAttributes,
+        @PathVariable( "id" ) id: Long,
+    ) : String {
+
+
+        val announcement : Announcement? = announcementDomain.findById(id).orElse(null)
+
+        if ( announcement == null ) {
+
+            ControlForm.redirectAttribute(
+                redirectAttributes,
+                "Annonce introuvable",
+                Color.red
+            )
+
+        }
+        else {
+
+            announcement.delete = true
+
+            announcementDomain.save( announcement )
+
+            ControlForm.redirectAttribute(
+                redirectAttributes,
+                "Annonce supprimé",
+                Color.green
+            )
+
+        }
+
+
+        return redirectTo( announcements )
+
     }
 
 }

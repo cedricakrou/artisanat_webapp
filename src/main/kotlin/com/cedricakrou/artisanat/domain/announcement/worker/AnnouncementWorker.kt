@@ -83,4 +83,6 @@ class AnnouncementWorker( val repository : AnnouncementRepository,
 
     override fun findAnnouncementsBySpeciality( id : Long ): List<Announcement> = repository.findAllBySpeciality_Id( id )
 
+    override fun findAllByDelete(delete: Boolean): List<Announcement> = repository.findAllByDelete(delete)
+
 }
