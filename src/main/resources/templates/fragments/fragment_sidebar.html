@@ -56,7 +56,7 @@
 
                 <li th:if="${user.admin}">
                     <a th:href="@{/backend/admin/specialities}">
-                        <i class="now-ui-icons users_single-02"></i>
+                        <i class="now-ui-icons education_paper"></i>
                         <p>Secteur d'activité</p>
                     </a>
                 </li>
@@ -73,7 +73,7 @@
 
                 <!-- ARTISAN -->
 
-                    <li th:if="${user.artisan}">
+                    <li th:if="${user.artisan && user.visible}">
                         <a th:href="@{/backend/artisan/announcements}">
                             <i class="now-ui-icons files_paper"></i>
                             <p>Annonces</p>
@@ -83,8 +83,8 @@
                 <!-- END ARTISAN -->
 
 
-                <li>
-                    <a th:href="@{/backend/profil/}">
+                <li th:if="${user.artisan}">
+                    <a th:href="@{/backend/artisan/profil/}">
                         <i class="now-ui-icons users_circle-08"></i>
                         <p>Mon Profil</p>
                     </a>

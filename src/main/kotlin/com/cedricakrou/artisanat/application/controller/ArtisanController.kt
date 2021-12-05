@@ -24,6 +24,7 @@ class ArtisanController(
 
     companion object {
         const val announcements = "/announcements"
+        const val profil = "/profil"
     }
 
     @GetMapping(UrlCommon.home)
@@ -43,5 +44,17 @@ class ArtisanController(
         model.addAttribute( "announcements", announcementDomain.findAnnouncementsBySpeciality( user.speciality!!.id ) )
 
         return forwardTo( announcements )
+    }
+
+    @GetMapping( profil )
+    fun profil(
+        model: Model
+    ) : String {
+
+//        model.addAttribute( "formations",  )
+//        model.addAttribute( "experiences",  )
+//        model.addAttribute( "references",  )
+
+       return forwardTo( profil )
     }
 }

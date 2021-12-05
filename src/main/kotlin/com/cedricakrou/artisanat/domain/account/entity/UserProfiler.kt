@@ -1,5 +1,7 @@
 package com.cedricakrou.artisanat.domain.account.entity
 
+import com.cedricakrou.artisanat.domain.account.entity.artisan.Artisan
+
 
 object UserProfiler {
 
@@ -28,6 +30,8 @@ object UserProfiler {
         var artisan : Boolean = false
 
 
+        var visible : Boolean = false
+
         init {
             val roles = user.roles
 
@@ -37,6 +41,10 @@ object UserProfiler {
             admin = roles.any { it.name == UserType.ADMIN }
             client = roles.any { it.name == UserType.CLIENT }
             artisan = roles.any { it.name == UserType.ARTISAN }
+
+            if ( user is Artisan ) {
+                visible = user.visible
+            }
 
             firstConnection = user.firstConnection
 
