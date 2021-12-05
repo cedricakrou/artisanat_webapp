@@ -25,7 +25,7 @@
                                 <a class="nav-link active" data-toggle="modal" data-target="#modalFormation" >Formations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="modal" data-target="#modalExperience">Expériences</a>
+                                <a class="nav-link active" data-toggle="modal" data-target="#modalExperience" > Expériences</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="modal" data-target="#modalReference">Références</a>
@@ -35,14 +35,143 @@
                     <div class="card-body">
                         <h4 class="card-title">Administrer votre profil</h4>
                         <p class="card-text">Ajouter vos compétences et expériences.</p>
-                        <a href="#" class="btn btn-primary">Et faîtes vous rémarquer</a>
                     </div>
                 </div>
             </div>
 
         </section>
 
+
+        <section>
+
+            <div class="content">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"> Liste des formations</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th style="display: none">
+                                            Id
+                                        </th>
+                                        <th>
+                                            Libelle
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" item : ${formations} " >
+                                            <td style="display: none" th:text="${item.id}" ></td>
+                                            <td th:text="${item.name}" ></td>
+                                            <td th:text="${item.description}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"> Liste des expériences</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th style="display: none">
+                                            Id
+                                        </th>
+                                        <th>
+                                            Libelle
+                                        </th>
+                                        <th>
+                                            Date de debut
+                                        </th>
+                                        <th>
+                                            Date de fin
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" item : ${experiences} " >
+                                            <td style="display: none" th:text="${item.id}" ></td>
+                                            <td th:text="${item.name}" ></td>
+                                            <td th:text="${item.startDate}" ></td>
+                                            <td th:text="${item.endDate}" ></td>
+                                            <td th:text="${item.description}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"> Liste des references</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th style="display: none">
+                                            Id
+                                        </th>
+                                        <th>
+                                            Libelle
+                                        </th>
+                                        <th>
+                                            Lien
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" item : ${references} " >
+                                            <td style="display: none" th:text="${item.id}" ></td>
+                                            <td th:text="${item.name}" ></td>
+                                            <td th:text="${item.link}" ></td>
+                                            <td th:text="${item.description}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
     </div>
+
+
 
 
     <div id="modalFormation" class="modal fade" tabindex="-1" role="dialog"
@@ -50,7 +179,7 @@
 
         <div th:insert="fragments/modal/add-modal ::
                                                 add_modal (title='Ajouter une formation',
-                                                updateUrl='/backend/artisan/add-formation',
+                                                updateUrl='/backend/artisan/formations',
                                                 body = ~{ :: #modal_body})">
 
             <div id="modal_body">
@@ -79,12 +208,13 @@
 
     </div>
 
-    <div id="modalExpérience" class="modal fade" tabindex="-1" role="dialog"
+    <div id="modalExperience" class="modal fade" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-        <div th:insert="fragments/modal/add-modal ::Ajouter une experience',
-                                                updateUrl='/backend/artisan/add-experience',
-                                                body = ~{ :: #modal_body})">
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Ajouter une experience',
+                                                updateUrl='/backend/artisan/experiences',
+                                                body = ~{ :: #modal_body_deblock})">
 
             <div id="modal_body_deblock">
 
@@ -141,8 +271,8 @@
 
         <div th:insert="fragments/modal/add-modal ::
                                                 add_modal (title='Ajouter une référence',
-                                                updateUrl='/backend/artisan/add-reference',
-                                                body = ~{ :: #modal_body})">
+                                                updateUrl='/backend/artisan/references',
+                                                body = ~{ :: #modal_body_delete})">
 
             <div id="modal_body_delete">
 

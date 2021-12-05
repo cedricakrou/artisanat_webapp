@@ -43,15 +43,15 @@ class MainController(private val userDomain: UserDomain,
            return when( userType ){
 
             UserType.ACTUATOR -> {
-                forwardTo("/actuator/home")
+                redirectTo("/actuator/home")
             }
 
             UserType.ADMIN -> {
-                forwardTo("/admin/home")
+                redirectTo("/admin/artisans")
             }
 
             UserType.ARTISAN -> {
-                redirectTo( "/artisan/home" )
+                redirectTo( "/artisan/profil" )
             }
 
             UserType.CLIENT -> {

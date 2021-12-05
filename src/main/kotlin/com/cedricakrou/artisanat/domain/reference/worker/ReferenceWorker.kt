@@ -15,7 +15,6 @@ class ReferenceWorker( val repository: ReferenceRepository ) : ReferenceDomain
         repository.save( model )
 
         return OperationResult( HashMap<String, String>(), model )
-
     }
 
     override fun findById(id: Long): Optional<Reference> {
