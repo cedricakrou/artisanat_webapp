@@ -11,6 +11,7 @@ interface AnnouncementRepository : JpaRepository<Announcement, Long>  {
 
     fun findAllByClient_Username( username : String ) : List<Announcement>
     fun findAllBySpeciality_Id( id : Long ) : List<Announcement>
+    fun findAllBySpeciality_IdAndDelete( id : Long, delete: Boolean ) : List<Announcement>
 
 
     fun findAllByDelete( delete : Boolean ) : List<Announcement>

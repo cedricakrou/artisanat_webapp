@@ -23,7 +23,7 @@ class ArtisanController(
 ) : BaseController( UrlCommon.artisanEndPoint ) {
 
     companion object {
-        const val listAnnouncements = "list-announcements"
+        const val announcements = "/announcements"
     }
 
     @GetMapping(UrlCommon.home)
@@ -33,7 +33,7 @@ class ArtisanController(
      *  To save and update Artisan
      */
 
-    @GetMapping( listAnnouncements )
+    @GetMapping( announcements )
     fun listAnnouncements(
         model : Model
     ) : String {
@@ -42,6 +42,6 @@ class ArtisanController(
 
         model.addAttribute( "announcements", announcementDomain.findAnnouncementsBySpeciality( user.speciality!!.id ) )
 
-        return forwardTo( listAnnouncements )
+        return forwardTo( announcements )
     }
 }

@@ -23,8 +23,9 @@ object UserProfiler {
 
         var admin: Boolean = false
 
-
         var client : Boolean = false
+
+        var artisan : Boolean = false
 
 
         init {
@@ -35,6 +36,7 @@ object UserProfiler {
             actuator = roles.any { it.name == UserType.ACTUATOR }
             admin = roles.any { it.name == UserType.ADMIN }
             client = roles.any { it.name == UserType.CLIENT }
+            artisan = roles.any { it.name == UserType.ARTISAN }
 
             firstConnection = user.firstConnection
 

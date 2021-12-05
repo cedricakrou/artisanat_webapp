@@ -81,7 +81,7 @@ class EmailHelper(
         val process = templateEngine.process("service/email/send-code-template", context)
         val mimeMessage = javaMailSender.createMimeMessage()
         val helper = MimeMessageHelper(mimeMessage)
-        helper.setSubject( sendCodeDto.user.firstname + " " + sendCodeDto.user.lastname + " veuillez communiquer le code pour terminer la consultation.")
+        helper.setSubject( sendCodeDto.user.firstname + " " + sendCodeDto.user.lastname + " ,veuillez confirmer votre compte.")
         helper.setText(process, true)
         helper.setTo(sendCodeDto.user.email)
         javaMailSender.send(mimeMessage)

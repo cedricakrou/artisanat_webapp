@@ -49,7 +49,7 @@
 
                 <li th:if="${user.admin}">
                     <a th:href="@{/backend/admin/announcements}">
-                        <i class="now-ui-icons users_single-02"></i>
+                        <i class="now-ui-icons files_paper"></i>
                         <p>Annonces</p>
                     </a>
                 </li>
@@ -71,10 +71,21 @@
 
                 <!-- END ADMIN -->
 
+                <!-- ARTISAN -->
+
+                    <li th:if="${user.artisan}">
+                        <a th:href="@{/backend/artisan/announcements}">
+                            <i class="now-ui-icons files_paper"></i>
+                            <p>Annonces</p>
+                        </a>
+                    </li>
+
+                <!-- END ARTISAN -->
+
 
                 <li>
                     <a th:href="@{/backend/profil/}">
-                        <i class="now-ui-icons user-profile"></i>
+                        <i class="now-ui-icons users_circle-08"></i>
                         <p>Mon Profil</p>
                     </a>
                 </li>
