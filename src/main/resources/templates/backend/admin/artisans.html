@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="fragments/fragment_head('Management artisans')" />
+
+<body>
+<div class="wrapper">
+    <th:block th:replace="fragments/fragment_sidebar :: sidebar"/>
+
+    <div class="main-panel" id="main-panel">
+
+        <section class="p-4">
+            <div class="container">
+
+            </div>
+        </section>
+
+        <section>
+            <div class="panel-header panel-header-sm">
+            </div>
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"> Liste des artisans non activés</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th>
+                                            Username
+                                        </th>
+                                        <th>
+                                            Nom
+                                        </th>
+                                        <th>
+                                            Prénom
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Téléphone
+                                        </th>
+                                        <th class="text-right">
+                                            Actions
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" artisan : ${artisans} " >
+                                            <td th:text="${artisan.username}" ></td>
+                                            <td th:text="${artisan.lastname}" ></td>
+                                            <td th:text="${artisan.firstname}"></td>
+                                            <td th:text="${artisan.email}"></td>
+                                            <td th:text="${artisan.phoneNumber}"></td>
+                                            <td class="text-right">
+                                                <button type="button" id="reloadDistributor" class="btn btn-info" data-toggle="modal" data-target="#modalReload">
+                                                    Activer le compte
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+    <!-- Modal reload distributor -->
+    <div id="modalReload" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Activer compte',
+                                                updateUrl='/backend/admin/activate-account',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+                            <p>Voulez vous activer le compte de l'artisan ?</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<th:block th:replace="fragments/fragment_footer :: footer"/>
+
+<th:block th:replace="fragments/fragment_script :: script"/>
+</body>
+</html>

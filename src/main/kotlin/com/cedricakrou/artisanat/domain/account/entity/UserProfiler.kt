@@ -15,27 +15,16 @@ object UserProfiler {
 
         val username = user.username
 
-        var balance : Double = user.balance
-
         var function : String = ""
 
         var firstConnection : Boolean = true
-
-        val isEnabled = user.isEnabled
 
         var actuator: Boolean = false
 
         var admin: Boolean = false
 
-        var agent : Boolean = false
 
         var client : Boolean = false
-
-        var doctor  : Boolean = false
-
-        var pharmacy : Boolean = false
-
-        var healthCenter : Boolean = false
 
 
         init {

@@ -1,11 +1,10 @@
 package com.cedricakrou.artisanat.domain.account.worker
 
 import com.b2i.neo.application.controlForm.Generate
-import com.cedricakrou.artisanat.application.event.RegisterDoneEvent
 import com.cedricakrou.artisanat.domain.account.entity.User
 import com.cedricakrou.artisanat.domain.account.vm.UserVm
 import com.cedricakrou.artisanat.data.repositories.UserRepository
-import com.cedricakrou.artisanat.domain.account.entity.Artisan
+import com.cedricakrou.artisanat.domain.account.entity.artisan.Artisan
 import com.cedricakrou.artisanat.domain.common.OperationResult
 import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
 import com.cedricakrou.artisanat.domain.speciality.worker.SpecialityDomain
@@ -58,8 +57,8 @@ class UserWorker(private val userRepository: UserRepository,
             }
 
         }
-        /**
-        if ( user is Doctor ) {
+
+        if ( user is Artisan) {
 
             if ( user.speciality != null && user.speciality!!.id != -1L ) {
 
@@ -80,7 +79,7 @@ class UserWorker(private val userRepository: UserRepository,
             }
 
         }
-**/
+
 
         if ( errors.isEmpty() ) {
 
@@ -88,7 +87,7 @@ class UserWorker(private val userRepository: UserRepository,
 
                 if ( user.password.isEmpty() ) {
                     user.password = Generate.generatedRandomCharacter( 6 )
-                    eventPublisher.publishEvent( RegisterDoneEvent( user ) )
+//                    eventPublisher.publishEvent( RegisterDoneEvent( user ) )
                 }
 
                 userSave = userRepository.save(user)
@@ -154,7 +153,7 @@ class UserWorker(private val userRepository: UserRepository,
           errors["pinEmpty"] = "Veuillez enregistrer votre code pin."
         }
 
-        if( user is Artisan ) {
+        if( user is Artisan) {
 
             val speciality : Speciality? = specialityDomain.findById( user.speciality!!.id ).orElse(null)
 

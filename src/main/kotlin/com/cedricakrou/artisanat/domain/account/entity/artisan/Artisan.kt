@@ -1,5 +1,8 @@
-package com.cedricakrou.artisanat.domain.account.entity
+package com.cedricakrou.artisanat.domain.account.entity.artisan
 
+import com.cedricakrou.artisanat.domain.account.entity.Role
+import com.cedricakrou.artisanat.domain.account.entity.User
+import com.cedricakrou.artisanat.domain.account.entity.UserType
 import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import javax.persistence.DiscriminatorValue

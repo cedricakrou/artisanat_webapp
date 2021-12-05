@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="fragments/fragment_head('Management artisans')" />
+
+<body>
+<div class="wrapper">
+    <th:block th:replace="fragments/fragment_sidebar :: sidebar"/>
+
+    <div class="main-panel" id="main-panel">
+
+        <section class="p-4">
+            <div class="container">
+                <div class="">
+                    <div class="row justify-content-between align-items-center text-center text-md-left">
+                        <div class="col-md-9">
+                            <h4 class="mb-1 color-white">Bénéficiez dès maintenant des avantages de notre solution.</h4>
+                        </div>
+                        <div class="col-md-3 text-lg-right">
+                            <a data-toggle="modal" data-target="#modalReload" class="btn btn-light btn-round px-5">Créer un secteur d'activité</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="panel-header panel-header-sm">
+            </div>
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"> Liste des secteurs d'activités</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th style="display: none">
+                                            Id
+                                        </th>
+                                        <th>
+                                            Libelle
+                                        </th>
+                                        <th>
+                                            Description
+                                        </th>
+                                        <th class="text-right">
+                                            Actions
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" speciality : ${specialities} " >
+                                            <td style="display: none" th:text="${speciality.id}" ></td>
+                                            <td th:text="${speciality.name}" ></td>
+                                            <td th:text="${speciality.description}"></td>
+                                            <td class="text-right">
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalReload">
+                                                    Modifier
+                                                </button>
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">
+                                                    Supprimer
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+    <!-- Modal save -->
+    <div id="modalReload" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Ajouter/Modifier un secteur',
+                                                updateUrl='/backend/admin/save-speciality',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Nom du secteur</label>
+                                        <input type="text" name="name"  class="form-control" placeholder="Nom de la specialité" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea rows="4" cols="80" class="form-control" placeholder="Entrez la description" name="description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="modalDelete" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabelD" aria-hidden="true">
+
+        <div th:insert="fragments/modal/delete-modal ::
+                                                delete_modal (title='Supprimer',
+                                                deleteUrl='/backend/admin/delete-speciality') ">
+        </div>
+
+    </div>
+
+
+</div>
+
+<th:block th:replace="fragments/fragment_footer :: footer"/>
+
+<th:block th:replace="fragments/fragment_script :: script"/>
+</body>
+</html>

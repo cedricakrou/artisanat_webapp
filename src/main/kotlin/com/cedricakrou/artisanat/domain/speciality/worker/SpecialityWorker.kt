@@ -18,7 +18,7 @@ class SpecialityWorker( val repository: SpecialityRepository) : SpecialityDomain
         if ( model.name.isEmpty()) {
             errors["nameIsEmpty"] = "Veuillez renseigner le nom de la specialité"
         }
-        else if ( repository.countByName( model.name ) != 0L ) {
+        else if ( model.id == -1L && repository.countByName( model.name ) != 0L ) {
             errors["nameExists"] = "Le nom de la specialité existe dejà"
         }
 

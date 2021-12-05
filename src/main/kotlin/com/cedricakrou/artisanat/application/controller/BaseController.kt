@@ -12,6 +12,11 @@ abstract class BaseController( private val templateBaseDir : String, private val
         return String.format("redirect:%s%s", routeBase, urlController )
     }
 
+    internal fun redirectToZero( baseUrl: String, urlController : String ) : String
+    {
+        return String.format("redirect:%s%s", baseUrl, urlController )
+    }
+
     internal fun redirectFromZero(baseUrl : String, urlController : String ) : String
     {
         return String.format("redirect:%s%s", baseUrl, urlController )
