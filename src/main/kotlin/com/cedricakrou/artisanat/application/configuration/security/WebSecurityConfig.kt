@@ -58,10 +58,10 @@ class WebSecurityConfig(private val userDetailsServiceImplementation : UserDetai
         web?.ignoring()?.antMatchers(
             "/assets/**",
             "/frontend/**",
-                "/swagger-resources/**",
-                "/v2/api-docs",
-                "/swagger-ui.html",
-                "/webjars/**"
+            "/swagger-resources/**",
+            "/v2/api-docs",
+            "/swagger-ui.html",
+            "/webjars/**"
         )
 
     }
