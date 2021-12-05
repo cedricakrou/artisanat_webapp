@@ -4,7 +4,7 @@ import com.b2i.neo.application.controlForm.Generate
 import com.cedricakrou.artisanat.application.controlForm.ControlForm
 import com.cedricakrou.artisanat.application.event.SendCodeEvent
 import com.cedricakrou.artisanat.application.event.dto.SendCodeDto
-import com.cedricakrou.artisanat.domain.account.entity.Client
+import com.cedricakrou.artisanat.domain.account.entity.client.Client
 import com.cedricakrou.artisanat.domain.account.entity.Role
 import com.cedricakrou.artisanat.domain.account.entity.User
 import com.cedricakrou.artisanat.domain.account.entity.UserType

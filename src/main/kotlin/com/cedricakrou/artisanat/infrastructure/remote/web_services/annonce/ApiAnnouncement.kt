@@ -1,7 +1,7 @@
 package com.cedricakrou.artisanat.infrastructure.remote.web_services.annonce
 
 import com.cedricakrou.artisanat.application.controlForm.ControlForm
-import com.cedricakrou.artisanat.domain.account.entity.Client
+import com.cedricakrou.artisanat.domain.account.entity.client.Client
 import com.cedricakrou.artisanat.domain.announcement.entity.Announcement
 import com.cedricakrou.artisanat.domain.announcement.worker.AnnouncementDomain
 import com.cedricakrou.artisanat.domain.common.OperationResult

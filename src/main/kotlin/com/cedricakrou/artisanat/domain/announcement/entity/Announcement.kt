@@ -1,6 +1,6 @@
 package com.cedricakrou.artisanat.domain.announcement.entity
 
-import com.cedricakrou.artisanat.domain.account.entity.Client
+import com.cedricakrou.artisanat.domain.account.entity.client.Client
 import com.cedricakrou.artisanat.domain.common.BaseTableEntity
 import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
 import java.util.*

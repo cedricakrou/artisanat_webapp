@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="fragments/fragment_head('Management clients')" />
+
+<body>
+<div class="wrapper">
+    <th:block th:replace="fragments/fragment_sidebar :: sidebar"/>
+
+    <div class="main-panel" id="main-panel">
+
+        <section class="p-4">
+            <div class="container">
+
+            </div>
+        </section>
+
+        <section>
+            <div class="panel-header panel-header-sm">
+            </div>
+
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"> Liste des clients non activés</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                        <th>
+                                            Username
+                                        </th>
+                                        <th>
+                                            Nom
+                                        </th>
+                                        <th>
+                                            Prénom
+                                        </th>
+                                        <th>
+                                            Email
+                                        </th>
+                                        <th>
+                                            Téléphone
+                                        </th>
+                                        <th class="text-right">
+                                            Actions
+                                        </th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each=" client : ${clients} " >
+                                            <td th:text="${client.username}" ></td>
+                                            <td th:text="${client.lastname}" ></td>
+                                            <td th:text="${client.firstname}"></td>
+                                            <td th:text="${client.email}"></td>
+                                            <td th:text="${client.phoneNumber}"></td>
+                                            <td class="text-right">
+
+                                                <button th:unless="${client.block}" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalBlock">
+                                                    Bloquer
+                                                </button>
+
+                                                <button th:if="${client.block}" type="button" class="btn btn-info" data-toggle="modal" data-target="#modalDeBlock">
+                                                    Debloquer
+                                                </button>
+
+                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalDelete">
+                                                    Supprimer
+                                                </button>
+
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+
+    </div>
+
+
+    <!-- Modal reload distributor -->
+    <div id="modalBlock" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Bloquer compte',
+                                                updateUrl='/backend/admin/change-statut-client',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+                            <p>Voulez vous bloquer le compte du client ?</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modalDeBlock" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Debloquer compte',
+                                                updateUrl='/backend/admin/change-statut-client',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body_deblock">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+                            <p>Voulez vous debloquer le compte du client ?</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modalDelete" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div th:insert="fragments/modal/add-modal ::
+                                                add_modal (title='Supprimer compte',
+                                                updateUrl='/backend/admin/delete-client',
+                                                body = ~{ :: #modal_body})">
+
+            <div id="modal_body_delete">
+
+                <div class="row">
+                    <div class="col-md-12 pl-1">
+                        <div class="form-group">
+
+                            <p>Voulez vous supprimer le compte du client ?</p>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<th:block th:replace="fragments/fragment_footer :: footer"/>
+
+<th:block th:replace="fragments/fragment_script :: script"/>
+</body>
+</html>

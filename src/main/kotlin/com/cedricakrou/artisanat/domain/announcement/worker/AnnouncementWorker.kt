@@ -2,7 +2,7 @@ package com.cedricakrou.artisanat.domain.announcement.worker
 
 import com.cedricakrou.artisanat.application.controlForm.VerifyUser
 import com.cedricakrou.artisanat.data.repositories.AnnouncementRepository
-import com.cedricakrou.artisanat.domain.account.entity.Client
+import com.cedricakrou.artisanat.domain.account.entity.client.Client
 import com.cedricakrou.artisanat.domain.account.entity.User
 import com.cedricakrou.artisanat.domain.announcement.entity.Announcement
 import com.cedricakrou.artisanat.domain.common.OperationResult
@@ -49,7 +49,7 @@ class AnnouncementWorker( val repository : AnnouncementRepository,
 
         val client : User? = verifyUser.getUser( username = model.client.username )
 
-        if ( client == null || client !is Client ) {
+        if ( client == null || client !is Client) {
             errors["clientNotExist"] = "Le clientt n'existe pas"
         }
         else {
