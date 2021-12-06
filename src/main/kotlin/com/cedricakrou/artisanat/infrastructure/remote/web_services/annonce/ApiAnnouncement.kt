@@ -50,7 +50,7 @@ class ApiAnnouncement(
         if ( operationResult.errors.isEmpty() ) {
             response.error = false
             response.message = "Votre annonce a été crée avec succès"
-            response.data = operationResult.data
+            response.data = null
         }
         else {
             response.message = ControlForm.extractFirstMessage(operationResult.errors)
