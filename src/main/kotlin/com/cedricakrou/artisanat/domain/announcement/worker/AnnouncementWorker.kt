@@ -37,7 +37,7 @@ class AnnouncementWorker( val repository : AnnouncementRepository,
         }
 
         // get speciality
-        val speciality = specialityDomain.findById( id = model.speciality.id ).orElse( null )
+        val speciality = specialityDomain.findByName( name = model.speciality.name ).orElse( null )
 
         if ( speciality == null ) {
             errors["specialityNotExist"] = "Veuillez renseigner la specialité svp"
@@ -80,6 +80,8 @@ class AnnouncementWorker( val repository : AnnouncementRepository,
     override fun count(): Long = repository.count()
 
     override fun findMyAnnouncements(username: String): List<Announcement>  = repository.findAllByClient_Username(username)
+
+    override fun findOtherAnnouncements(username: String): List<Announcement> = repository.findAllByClient_UsernameNot( username )
 
     override fun findAnnouncementsBySpeciality( id : Long ): List<Announcement> = repository.findAllBySpeciality_IdAndDelete( id, false )
 

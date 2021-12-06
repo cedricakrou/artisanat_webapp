@@ -7,6 +7,8 @@ interface IManageAnnouncement : BasePort<Announcement> {
 
     fun findMyAnnouncements( username : String ) : List<Announcement>
 
+    fun findOtherAnnouncements( username : String ) : List<Announcement>
+
     fun findAnnouncementsBySpeciality( id : Long ) : List<Announcement>
 
     fun findAllByDelete( delete : Boolean ) : List<Announcement>

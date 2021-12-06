@@ -1,10 +1,8 @@
 package com.cedricakrou.artisanat.infrastructure.helper
 
-import com.b2i.neo.application.controlForm.Generate
 import com.cedricakrou.artisanat.application.controlForm.Url
 import com.cedricakrou.artisanat.application.event.dto.SendCodeDto
 import com.cedricakrou.artisanat.domain.account.entity.User
-import org.springframework.mail.SimpleMailMessage
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.stereotype.Service

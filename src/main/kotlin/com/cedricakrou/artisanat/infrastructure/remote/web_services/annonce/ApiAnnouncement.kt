@@ -6,6 +6,7 @@ import com.cedricakrou.artisanat.domain.announcement.entity.Announcement
 import com.cedricakrou.artisanat.domain.announcement.worker.AnnouncementDomain
 import com.cedricakrou.artisanat.domain.common.OperationResult
 import com.cedricakrou.artisanat.domain.speciality.entity.Speciality
+import com.cedricakrou.artisanat.domain.speciality.worker.SpecialityDomain
 import com.cedricakrou.artisanat.infrastructure.remote.utils.ApiConst
 import com.cedricakrou.artisanat.infrastructure.remote.utils.Response
 import org.springframework.web.bind.annotation.*
@@ -13,13 +14,16 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping( ApiConst.announcement )
 class ApiAnnouncement(
-    val announcementDomain: AnnouncementDomain
+    val announcementDomain: AnnouncementDomain,
+    val specialityDomain: SpecialityDomain
 ) {
 
     companion object {
         const val save = "/save"
 
         const val myAnnouncements = "/my-announcements"
+        const val listAnnouncements = "/list-announcements"
+        const val specialities = "/specialities"
     }
 
     @PostMapping( save )
@@ -28,7 +32,7 @@ class ApiAnnouncement(
         @RequestParam("description") description : String,
         @RequestParam("price") price : String,
         @RequestParam("client") client : String,
-        @RequestParam("speciality") speciality : Long
+        @RequestParam("speciality") speciality : String
     ) : Response<Announcement> {
 
         val response = Response<Announcement>()
@@ -38,7 +42,7 @@ class ApiAnnouncement(
             this.description = description
             this.price = price.toDouble()
             this.client = Client().apply { username = client }
-            this.speciality = Speciality().apply { id = speciality }
+            this.speciality = Speciality().apply { name = speciality }
         }
 
         val operationResult : OperationResult<Announcement> = announcementDomain.save( announcement )
@@ -62,6 +66,22 @@ class ApiAnnouncement(
         Response<List<Announcement>>().apply {
             error = false
             data = announcementDomain.findMyAnnouncements( username )
+        }
+
+    @PostMapping( listAnnouncements )
+    fun otherAnnouncements(
+        @RequestParam("username") username : String
+    ) : Response<List<Announcement>> =
+        Response<List<Announcement>>().apply {
+            error = false
+            data = announcementDomain.findOtherAnnouncements( username )
+        }
+
+    @GetMapping( specialities )
+    fun getSpecialities() : Response<List<Speciality>>
+        = Response<List<Speciality>>().apply {
+            error = false
+            data = specialityDomain.findAll()
         }
 
 }
